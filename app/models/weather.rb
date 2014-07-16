@@ -1,4 +1,6 @@
 class Weather
+  require 'open_weather'
+  
   attr_accessor :kelvin_temp, :description, :code
   
   def initialize(city)
