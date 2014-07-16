@@ -1,6 +1,6 @@
 class Weather
   require 'open_weather'
-  
+
   attr_accessor :kelvin_temp, :description, :code
   
   def initialize(city)
@@ -12,6 +12,10 @@ class Weather
 
   def current_temp
     return kelvin_to_farenheit(self.kelvin_temp)
+  end
+
+  def image_url
+    return "http://openweathermap.org/img/w/#{self.code}.png"
   end
 
   private
