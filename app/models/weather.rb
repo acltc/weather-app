@@ -1,26 +1,21 @@
 class Weather
   require 'open_weather'
 
-  attr_accessor :kelvin_temp, :description, :code
-  
-  def initialize(city)
-    weather_hash = OpenWeather::Current.city(city)
-    @description = weather_hash["weather"][0]["description"]
-    @kelvin_temp = weather_hash["main"]["temp"]
-    @code = weather_hash["weather"][0]["icon"]
-  end
+  attr_accessor :description, :temp
 
-  def current_temp
-    return kelvin_to_farenheit(self.kelvin_temp)
+  def initialize(city_state)
+    @weather_hash = OpenWeather::Current.city(city_state)
+    @description = @weather_hash["weather"][0]["description"]
+    @temp = convert_to_farenheit(@weather_hash["main"]["temp"])
+    @weather_code = @weather_hash["weather"][0]["icon"]
   end
 
   def image_url
-    return "http://openweathermap.org/img/w/#{self.code}.png"
+    return "http://openweathermap.org/img/w/#{@weather_code}.png"
   end
 
-  private
-
-  def kelvin_to_farenheit(kelvin)
-    return (1.8 * (self.kelvin_temp - 273) + 32).to_i
+  def convert_to_farenheit(kelvin_temp)
+    return (1.8 * (kelvin_temp - 273) + 32).to_i
   end
+
 end
