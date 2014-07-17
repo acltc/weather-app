@@ -1,4 +1,4 @@
 <h1>The current weather in Chicago is:</h1>
-<h2><%= @description %></h2>
-<%= image_tag "http://openweathermap.org/img/w/#{@weather_code}.png" %>
-<h2>Temp:<%= @current_temp %></h2>
+<h2><%= @weather.description %></h2>
+<%= image_tag @weather.image_url %>
+<h2>Temp:<%= @weather.temp %></h2>
